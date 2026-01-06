@@ -15,8 +15,8 @@ We begin with an empty project, which has the following elements:
 
 ### Acceptance Criteria:
 - [X] Project is created
-- [ ] Inner main
-- [ ] Outer main
+- [X] Inner main
+- [X] Outer main
 - [ ] Philippians data file
 - [X] README.md
 - [X] tickets folder with this ticket
