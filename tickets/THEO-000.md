@@ -8,7 +8,7 @@ We begin with an empty project, which has the following elements:
 
 1. An inner main (inside theophilus/), which simply prints out a text message to the console
 2. An outer main, which calls the inner main
-3. A few verses of Philippians (inside data/scriptures/newTestament/epistles/goEatPopcorn/philippians.lua)
+3. A few verses of Philippians (inside data/scriptures/newTestament/epistles/goEatPopcorn/philippiansNASB95.lua)
    File is in a nested object format.
 4. A README.md, with hardly any content
 5. A tickets/ folder with this ticket in it. When ticket is resolved, goes into a resolved/ subdirectory.
@@ -17,7 +17,7 @@ We begin with an empty project, which has the following elements:
 - [X] Project is created
 - [X] Inner main
 - [X] Outer main
-- [ ] Philippians data file
+- [X] Philippians data file
 - [X] README.md
 - [X] tickets folder with this ticket
 
