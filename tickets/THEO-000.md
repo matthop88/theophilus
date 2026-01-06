@@ -14,12 +14,12 @@ We begin with an empty project, which has the following elements:
 5. A tickets/ folder with this ticket in it. When ticket is resolved, goes into a resolved/ subdirectory.
 
 ### Acceptance Criteria:
-- [ ] Project is created
+- [X] Project is created
 - [ ] Inner main
 - [ ] Outer main
 - [ ] Philippians data file
-- [ ] README.md
-- [ ] tickets folder with this ticket
+- [X] README.md
+- [X] tickets folder with this ticket
 
 **Story Points**: 1 <br/>
 **Resolution**: UNRESOLVED <br/>
