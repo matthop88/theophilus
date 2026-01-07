@@ -7,15 +7,23 @@ end
 
 local testClasses = DISCOVER_TEST_CLASSES()
 
-print("\n")
+print()
 
 for n, testClass in ipairs(testClasses) do
     printCaption(testClass:getName())
 
     local testFunctions = DISCOVER_TEST_FUNCTIONS(testClass)
     for testName, testFn in pairs(testFunctions) do
-        testFn(testClass)
+        local status, err = pcall(function() testFn(testClass) end)
+        if status ~= true then
+            print()
+            print("FAILED => " .. testName)
+            print("          WITH ERROR: " .. err)
+            print()
+        end
     end 
 end
+
+print()
 
 love.event.quit()
