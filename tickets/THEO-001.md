@@ -24,7 +24,7 @@ To test this, we need a testing framework, which should test book names of 1 and
 - [X] Test for 1 argument book name passes
 - [X] Test for 2 argument book name passes
 - [X] Test for 0 argument book name passes (error test)
-- [ ] Test for 1 argument book name passes (where argument 1 is a number; error test)
+- [X] Test for 1 argument book name passes (where argument 1 is a number; error test)
 - [ ] Code in main to parse arguments and return the book and passage data structure
 
 **Story Points**: 3 <br/>
