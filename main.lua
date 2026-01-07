@@ -1,6 +1,6 @@
 require("app/main")
 
-local DISCOVER_TESTS = require("test/framework/discovery/discoverTests")
+local DISCOVER_TESTS = require("test/framework/discovery/discoverTestClasses")
 
 local tests = DISCOVER_TESTS()
 
