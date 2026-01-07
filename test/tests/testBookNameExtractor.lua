@@ -1,4 +1,5 @@
 local BOOK_NAME_EXTRACTOR = require("app/lib/parse/bookNameExtractor")
+local ASSERT_EQUALS       = require("test/framework/assert/assertEquals")
 
 return {
     getName = function(self) 
@@ -16,13 +17,9 @@ return {
     runExtractor = function(self, params)
         local result = BOOK_NAME_EXTRACTOR:execute(params)
 
-        if     result.error then
-            return "error = " .. result.error
-        elseif result.passage then
-            return "book = " .. result.book .. ", passage = " .. result.passage
-        else
-            return "book = " .. result.book
-        end
+        if     result.error   then return "error = " .. result.error
+        elseif result.passage then return "book = "  .. result.book .. ", passage = " .. result.passage
+        else                       return "book = "  .. result.book                                     end
     end,
     
     testSingleArgumentBookName = function(self)
@@ -30,7 +27,7 @@ return {
 
         local result = self:runExtractor { args = { "Genesis", "1:1" } }
         
-        return TESTING:assertEquals(name, result, "book = Genesis, passage = 1:1")
+        return ASSERT_EQUALS(name, result, "book = Genesis, passage = 1:1")
     end,
 
     testTwoArgumentBookName = function(self)
@@ -38,7 +35,7 @@ return {
 
         local result = self:runExtractor { args = { "1", "John", "3:16" } }
 
-        return TESTING:assertEquals(name, result, "book = 1 John, passage = 3:16")
+        return ASSERT_EQUALS(name, result, "book = 1 John, passage = 3:16")
     end,
 
     testNoPassage = function(self)
@@ -46,7 +43,7 @@ return {
 
         local result = self:runExtractor { args = { "Philippians" } }
 
-        return TESTING:assertEquals(name, result, "book = Philippians")
+        return ASSERT_EQUALS(name, result, "book = Philippians")
     end,
 
     testZeroArgumentBookNameError = function(self)
@@ -54,7 +51,7 @@ return {
 
         local result = self:runExtractor { args = {} }
 
-        return TESTING:assertEquals(name, result, "error = INSUFFICIENT ARGUMENTS: No Arguments Given")
+        return ASSERT_EQUALS(name, result, "error = INSUFFICIENT ARGUMENTS: No Arguments Given")
     end,
 
     testSingleArgumentBookNameError = function(self)
@@ -62,7 +59,7 @@ return {
 
         local result = self:runExtractor { args = { "1" } }
 
-        return TESTING:assertEquals(name, result, error = "INSUFFICIENT ARGUMENTS: '1' -> Book Name Expected")
+        return ASSERT_EQUALS(name, result, error = "INSUFFICIENT ARGUMENTS: '1' -> Book Name Expected")
     end,
 }
             
