@@ -59,7 +59,7 @@ return {
 
         local result = self:runExtractor { args = { "1" } }
 
-        return ASSERT_EQUALS(name, result, error = "INSUFFICIENT ARGUMENTS: '1' -> Book Name Expected")
+        return ASSERT_EQUALS(name, result, "error = INSUFFICIENT ARGUMENTS: '1' -> Book Name Expected")
     end,
 }
             
