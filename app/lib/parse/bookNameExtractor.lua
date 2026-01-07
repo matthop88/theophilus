@@ -4,19 +4,16 @@ return {
 
         if args == nil or #args == 0 then
             return { error = "INSUFFICIENT ARGUMENTS: No Arguments Given" }
-
         else
-            local bookName, passage
-
             if tonumber(args[1]) then
-                bookName = args[1] .. " " .. args[2]
-                passage  = args[3]
+                if args[2] == nil then
+                    return { error = "INSUFFICIENT ARGUMENTS: '" .. args[1] .. "' -> Book Name Expected" }
+                else
+                    return { book = args[1] .. " " .. args[2], passage = args[3] }
+                end
             else
-                bookName = args[1]
-                passage  = args[2]
+                return { book = args[1], passage = args[2] }
             end
-
-            return { book = bookName, passage = passage }
         end
     end,
 }
