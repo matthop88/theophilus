@@ -19,8 +19,8 @@ Inside app/lib/parse, we have a bookNameExtractor.lua. It does the following:
 To test this, we need a testing framework, which should test book names of 1 and 2 argument size, as well as the insufficient arguments error.
 
 ### Acceptance Criteria:
-- [ ] Testing Framework written
-- [ ] Code in outer main to run tests
+- [X] Testing Framework written
+- [X] Code in outer main to run tests
 - [ ] Test for 1 argument book name passes
 - [ ] Test for 2 argument book name passes
 - [ ] Test for 0 argument book name passes (error test)
