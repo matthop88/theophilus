@@ -28,7 +28,7 @@ Important: both bookLookup and bookMetaLookup should be able to handle data stru
 
 ### Acceptance Criteria:
 - [ ] Code to find a book written and tested
-- [ ] Philippians data added with a different version
+- [X] Philippians data added with a different version
 - [ ] Code to find a book with specific version written and tested
 - [ ] bookLookup code with happy path 1 (only book name requested)
 - [ ] bookLookup code with happy path 2 (book name and version requested)
