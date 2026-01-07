@@ -21,7 +21,7 @@ To test this, we need a testing framework, which should test book names of 1 and
 ### Acceptance Criteria:
 - [X] Testing Framework written
 - [X] Code in outer main to run tests
-- [ ] Test for 1 argument book name passes
+- [X] Test for 1 argument book name passes
 - [ ] Test for 2 argument book name passes
 - [ ] Test for 0 argument book name passes (error test)
 - [ ] Test for 1 argument book name passes (where argument 1 is a number; error test)
