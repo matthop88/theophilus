@@ -4,9 +4,14 @@ return {
 
         local bookName, passage
 
-        bookName = args[1]
-        passage  = args[2]
+        if tonumber(args[1]) then
+            bookName = args[1] .. " " .. args[2]
+            passage  = args[3]
+        else
+            bookName = args[1]
+            passage  = args[2]
+        end
 
-        return { book = args[1], passage = args[2] }
+        return { book = bookName, passage = passage }
     end,
 }
