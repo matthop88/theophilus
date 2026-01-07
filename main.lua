@@ -10,6 +10,6 @@ for n, testClass in ipairs(testClasses) do
 
     local testFunctions = DISCOVER_TEST_FUNCTIONS(testClass)
     for k, v in pairs(testFunctions) do
-        print("  " .. k)
+        v(testClass)
     end 
 end
