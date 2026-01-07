@@ -11,3 +11,5 @@ for n, testClass in ipairs(testClasses) do
         testFn(testClass)
     end 
 end
+
+love.event.quit()
