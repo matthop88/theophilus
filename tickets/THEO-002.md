@@ -27,9 +27,9 @@ In addition, we have a bookMetaLookup.lua. This is a wrapper for bookLookup, and
 Important: both bookLookup and bookMetaLookup should be able to handle data structures with an error, in which case they simply return the data structure.
 
 ### Acceptance Criteria:
-- [ ] Code to find a book written and tested
+- [X] Code to find a book written and tested
 - [X] Philippians data added with a different version
-- [ ] Code to find a book with specific version written and tested
+- [X] Code to find a book with specific version written and tested
 - [ ] bookLookup code with happy path 1 (only book name requested)
 - [ ] bookLookup code with happy path 2 (book name and version requested)
 - [ ] bookLookup code with happy path 3 (book name and unfindable version requested)
