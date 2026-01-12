@@ -17,13 +17,28 @@ return {
     testLookupNewTestamentFiles = function(self)
         local name = "New Testament File Lookup"
 
-        local files = LOOKUP_FILES("data/scriptures/newTestament")
+        local dataObjs = LOOKUP_FILES("data/scriptures/newTestament")
         
-        for _, file in ipairs(files) do
-            print(file)
-        end
+        local resultString = "File Count: " .. #dataObjs .. ", book = { " .. dataObjs[1].book .. ", " .. dataObjs[2].book .. ", " .. dataObjs[3].book .. " }, version = { " .. dataObjs[1].version .. ", " .. dataObjs[2].version .. ", " .. dataObjs[3].version .. " }"
+        return ASSERT_EQUALS(name, #dataObjs, 3)
+    end,
+
+    testLookupNewTestamentPhilippiansFiles = function(self)
+        local name = "New Testament Philippians Lookup"
+
+        local dataObjs = LOOKUP_FILES("data/scriptures/newTestament", function(data) return data.book == "Philippians" end)
         
-        return ASSERT_EQUALS(name, #files, 2)
+        local resultString = "File Count: " .. #dataObjs .. ", book = { " .. dataObjs[1].book .. ", " .. dataObjs[2].book .. " }, version = { " .. dataObjs[1].version .. ", " .. dataObjs[2].version .. " }"
+        return ASSERT_EQUALS(name, resultString, "File Count: 2, book = { Philippians, Philippians }, version = { KJV, NASB 95 }")
+    end,
+
+    testLookupNewTestamentPhilippiansNASB95Files = function(self)
+        local name = "New Testament Philippians NASB 95 Lookup"
+
+        local dataObjs = LOOKUP_FILES("data/scriptures/newTestament", function(data) return data.book == "Philippians" and data.version == "NASB 95" end)
+        
+        local resultString = "File Count: " .. #dataObjs .. ", book = " .. dataObjs[1].book .. ", version = " .. dataObjs[1].version
+        return ASSERT_EQUALS(name, resultString, "File Count: 1, book = Philippians, version = NASB 95")
     end,
 }
             
