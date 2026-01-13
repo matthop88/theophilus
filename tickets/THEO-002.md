@@ -34,7 +34,7 @@ Important: both bookLookup and bookMetaLookup should be able to handle data stru
 - [X] bookLookup code with happy path 2 (book name and version requested)
 - [X] bookLookup code with happy path 3 (book name and unfindable version requested)
 - [X] bookLookup code with sad   path 1 (unfindable book name requested)
-- [ ] bookLookup code with sad   path 2 (handed a data structure with an error)
+- [X] bookLookup code with sad   path 2 (handed a data structure with an error)
 - [ ] bookMetaLookup code, happy path 1 (only book name requested)
 - [ ] bookMetaLookup code, happy path 2 (book name and version requested)
 - [ ] bookMetaLookup code, warn  path   (book name and unfindable version requested)
