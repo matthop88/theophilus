@@ -47,6 +47,17 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV }")
     end,
 
+    testLookupBookNameUnhappyPath = function(self)
+        local name = "Book Lookup by name, Unhappy Path"
+
+        local result = BOOK_LOOKUP:execute { book = "Hesitations" }
+        
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", error = " .. result.error .. " }"
+        return ASSERT_EQUALS(name, resultString, "{ book = Hesitations, bookData = nil, error = BOOK NOT FOUND: Hesitations }")
+    end,
+
 }
             
         
