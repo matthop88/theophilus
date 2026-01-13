@@ -58,6 +58,14 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Hesitations, bookData = nil, error = BOOK NOT FOUND: Hesitations }")
     end,
 
+    testLookupBookNamePropagateError = function(self)
+        local name = "Book Lookup, Unhappy Path: Error propagation"
+
+        local result = BOOK_LOOKUP:execute { error = "INSUFFICIENT ARGUMENTS: No Arguments Given" }
+        
+        return ASSERT_EQUALS(name, result.error, "INSUFFICIENT ARGUMENTS: No Arguments Given")
+    end,
+
 }
             
         
