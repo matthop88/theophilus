@@ -24,6 +24,18 @@ return {
         local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. " }"
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV }")
     end,
+
+    testLookupBookNameAndVersionSuccess = function(self)
+        local name = "Book Lookup by name and version, Happy Path"
+
+        local result = BOOK_LOOKUP:execute { book = "Philippians", version = "NASB 95" }
+        
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. " }"
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = NASB 95 }")
+    end,
+
 }
             
         
