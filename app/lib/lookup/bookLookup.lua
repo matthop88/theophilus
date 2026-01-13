@@ -2,6 +2,8 @@ local LOOKUP_FILES  = require("app/lib/lookup/util/lookup")
 
 return {
 	execute = function(self, params)
+		if params.error then return params end
+		
 		local dataObjs = LOOKUP_FILES("data", function(data) return data.book == params.book end)
 
 		if #dataObjs == 0 then
