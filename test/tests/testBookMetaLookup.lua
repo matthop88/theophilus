@@ -14,15 +14,22 @@ return {
         -- Do nothing
     end,
 
+    resultToString = function(self, result)
+        local passageString = result.passage or "nil"
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString
+        if result.warning then
+            resultString = resultString .. ", warning = " .. result.warning
+        end
+        return resultString .. " }"
+    end,
+
     testLookupBookMetaNameSuccessNoPassage = function(self)
         local name = "Book Meta Lookup by name w.o. passage, Happy Path"
 
         local result = BOOK_META_LOOKUP:execute { book = "Philippians" }
-        
-        local passageString = result.passage or "nil"
-        local bookDataString = "nil"
-        if result.bookData then bookDataString = "(DATA)" end
-        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. " }"
+        local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = nil }")
     end,
 
@@ -30,11 +37,7 @@ return {
         local name = "Book Meta Lookup by name with passage, Happy Path"
 
         local result = BOOK_META_LOOKUP:execute { book = "Philippians", passage = "4:4" }
-        
-        local passageString = result.passage or "nil"
-        local bookDataString = "nil"
-        if result.bookData then bookDataString = "(DATA)" end
-        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. " }"
+        local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = 4:4 }")
     end,
 
@@ -42,11 +45,7 @@ return {
         local name = "Book Meta Lookup by name and version, Happy Path"
 
         local result = BOOK_META_LOOKUP:execute { book = "Philippians", version = "NASB 95" }
-        
-        local passageString = result.passage or "nil"
-        local bookDataString = "nil"
-        if result.bookData then bookDataString = "(DATA)" end
-        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. " }"
+        local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = NASB 95, chapterCount = 4, passage = nil }")
     end,
 
@@ -54,11 +53,7 @@ return {
         local name = "Book Meta Lookup by name and wrong version, Warning Path"
 
         local result = BOOK_META_LOOKUP:execute { book = "Philippians", version = "NIV" }
-        
-        local passageString = result.passage or "nil"
-        local bookDataString = "nil"
-        if result.bookData then bookDataString = "(DATA)" end
-        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. ", warning = " .. result.warning .. " }"
+        local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = nil, warning = VERSION NOT FOUND: Philippians NIV, instead found KJV }")
     end,
 
