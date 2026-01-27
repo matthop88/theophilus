@@ -4,7 +4,7 @@ return {
 	execute = function(self, params)
 		if params.error then return params end
 		
-		local dataObjs = LOOKUP_FILES("data", function(data) return data.book == params.book end)
+		local dataObjs = LOOKUP_FILES("data/scriptures", function(data) return data.book == params.book end)
 
 		if #dataObjs == 0 then
 			return {
