@@ -25,6 +25,10 @@ return {
 				result.chapterCount = result.bookData.chapterCount
 				result.passage      = params.passage
 
+				if params.version and result.version ~= params.version then
+					result.warning = "VERSION NOT FOUND: " .. params.book .. " " .. params.version .. ", instead found " .. result.version
+				end
+				
 				return result
 			end
 		end
