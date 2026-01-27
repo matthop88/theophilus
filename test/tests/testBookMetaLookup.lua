@@ -14,8 +14,8 @@ return {
         -- Do nothing
     end,
 
-    testLookupBookMetaNameSuccess = function(self)
-        local name = "Book Meta Lookup by name, Happy Path"
+    testLookupBookMetaNameSuccessNoPassage = function(self)
+        local name = "Book Meta Lookup by name w.o. passage, Happy Path"
 
         local result = BOOK_META_LOOKUP:execute { book = "Philippians" }
         
@@ -26,6 +26,40 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = nil }")
     end,
 
-}
-            
+    testLookupBookMetaNameSuccessWithPassage = function(self)
+        local name = "Book Meta Lookup by name with passage, Happy Path"
+
+        local result = BOOK_META_LOOKUP:execute { book = "Philippians", passage = "4:4" }
         
+        local passageString = result.passage or "nil"
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. " }"
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = 4:4 }")
+    end,
+
+    testLookupBookMetaNameAndVersionSuccess = function(self)
+        local name = "Book Meta Lookup by name and version, Happy Path"
+
+        local result = BOOK_META_LOOKUP:execute { book = "Philippians", version = "NASB 95" }
+        
+        local passageString = result.passage or "nil"
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. " }"
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = NASB 95, chapterCount = 4, passage = nil }")
+    end,
+
+    testLookupBookMetaNameAndWrongVersionSuccess = function(self)
+        local name = "Book Meta Lookup by name and wrong version, Warning Path"
+
+        local result = BOOK_META_LOOKUP:execute { book = "Philippians", version = "NIV" }
+        
+        local passageString = result.passage or "nil"
+        local bookDataString = "nil"
+        if result.bookData then bookDataString = "(DATA)" end
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString .. ", warning = " .. result.warning .. " }"
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = nil, warning = VERSION NOT FOUND: Philippians NIV, instead found KJV }")
+    end,
+
+}
