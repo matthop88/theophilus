@@ -40,12 +40,12 @@ Important: both bookLookup and bookMetaLookup should be able to handle data stru
 - [X] bookMetaLookup code, warn  path   (book name and unfindable version requested)
 - [X] bookMetaLookup code, sad   path 1 (unfindable book name requested)
 - [X] bookMetaLookup code, sad   path 2 (handed a data structure with an error)
-- [ ] Code in main to utilize bookMetaLookup. Awesome stuff!
+- [X] Code in main to utilize bookMetaLookup. Awesome stuff!
 
 **Story Points**: 3 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 1 <br/>
 
 **Dates**: <br/>
 **Created**: 01/07/26 11:46 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 01/28/26 10:41 am <br/>
