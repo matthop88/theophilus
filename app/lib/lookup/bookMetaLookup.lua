@@ -19,18 +19,17 @@ return {
 			return params
 		else
 			local result = BOOK_LOOKUP:execute(params)
-			if result.error then 
-				return result
-			else
-				result.chapterCount = result.bookData.chapterCount
-				result.passage      = params.passage
 
+			result.passage = params.passage
+			if not result.error then 
+				result.chapterCount = result.bookData.chapterCount
+				
 				if params.version and result.version ~= params.version then
 					result.warning = "VERSION NOT FOUND: " .. params.book .. " " .. params.version .. ", instead found " .. result.version
 				end
-				
-				return result
 			end
+				
+			return result
 		end
 	end,
 }
