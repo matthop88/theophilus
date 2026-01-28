@@ -21,9 +21,10 @@ return {
         local versionString = "" .. (result.version or "nil")
         local chapterCountString = "" .. (result.chapterCount or "nil")
         local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. versionString .. ", chapterCount = " .. chapterCountString .. ", passage = " .. passageString
-        if result.warning then
-            resultString = resultString .. ", warning = " .. result.warning
-        end
+        
+        if result.warning then resultString = resultString .. ", warning = " .. result.warning end
+        if result.error   then resultString = resultString .. ", error = "   .. result.error   end
+        
         return resultString .. " }"
     end,
 
