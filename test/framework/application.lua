@@ -2,7 +2,7 @@ local DISCOVER_TEST_CLASSES   = require("test/framework/discovery/discoverTestCl
 local DISCOVER_TEST_FUNCTIONS = require("test/framework/discovery/discoverTestFunctions")
 
 local printCaption = function(str)
-    print(str .. "\n" .. string.rep("-", string.len(str)))
+    print("\n" .. str .. "\n" .. string.rep("-", string.len(str)))
 end
 
 local testClasses = DISCOVER_TEST_CLASSES()

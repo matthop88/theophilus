@@ -3,7 +3,9 @@
 return function(myTable)
 	print("{")
 	for k, v in pairs(myTable) do
-		print("  " .. k .. " = \"" .. v .. "\",")
+		local valueString = v
+		if type(v) == "table" then valueString = "(TABLE DATA)" end
+		print("  " .. k .. " = \"" .. valueString .. "\",")
 	end
 	print("}")
 end
