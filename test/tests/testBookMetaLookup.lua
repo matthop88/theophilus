@@ -18,7 +18,9 @@ return {
         local passageString = result.passage or "nil"
         local bookDataString = "nil"
         if result.bookData then bookDataString = "(DATA)" end
-        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. result.version .. ", chapterCount = " .. result.chapterCount .. ", passage = " .. passageString
+        local versionString = "" .. (result.version or "nil")
+        local chapterCountString = "" .. (result.chapterCount or "nil")
+        local resultString = "{ book = " .. result.book .. ", bookData = " .. bookDataString .. ", version = " .. versionString .. ", chapterCount = " .. chapterCountString .. ", passage = " .. passageString
         if result.warning then
             resultString = resultString .. ", warning = " .. result.warning
         end
@@ -56,5 +58,14 @@ return {
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = (DATA), version = KJV, chapterCount = 4, passage = nil, warning = VERSION NOT FOUND: Philippians NIV, instead found KJV }")
     end,
+
+    testLookupBookMetaWrongNameFailure = function(self)
+        local name = "Book Meta Lookup by wrong name, Unhappy Path"
+
+        local result = BOOK_META_LOOKUP:execute { book = "Hesitations", passage = "3:16", version = "NASB 95" }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Hesitations, bookData = nil, version = nil, chapterCount = nil, passage = 3:16, error = BOOK NOT FOUND: Hesitations }")
+    end,
+
 
 }
