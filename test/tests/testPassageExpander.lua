@@ -46,5 +46,14 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = nil, version = nil, chapterCount = 4, passage = 3, body = { { chapter = 3, verse = 1-? } } }")
     end,
 
+    testExpansionSingleChapterForChapterlessBook = function(self)
+        local name = "Passage Expansion with Single Value, Chapterless Volume"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "3", chapterCount = 0 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, bookData = nil, version = nil, chapterCount = 0, passage = 3, body = { { chapter = 0, verse = 3 } } }")
+    end,
+
+
     -- TODO: Test with non-numeric chapter
 }
