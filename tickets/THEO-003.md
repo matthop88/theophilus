@@ -62,13 +62,24 @@ error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 
 ### Acceptance Criteria:
 - [X] Error propagation
-- [ ] Scenario #4
-- [ ] Scenario #3
-- [ ] Scenario #2a
-- [ ] Scenario #2b
-- [ ] Scenario #1
-- [ ] Chapters out of bounds
-- [ ] Rolled in to inner main
+- [X] Expand passage with single chapter, no verses specified
+- [ ] Expand passage with single 'chapter' for 0-chapter volume
+- [ ] Corner case: single chapter w.o. verses, invalid number
+- [ ] Expand passage with range of chapters, no verses specified
+- [ ] Expand passage with range of 'chapters' for 0-chapter volume
+- [ ] Corner case: chapter range w.o. verses, invalid number as part of range
+- [ ] Expand passage when no passage is specified
+- [ ] Expand passage when no passage is specified for 0-chapter volume
+- [ ] Corner case: error when range makes no sense (i.e., 3-4:7, 3:16-17-18, 3:17-16)
+- [ ] Expand passage with single chapter and 1 verse
+- [ ] Corner case: single chapter and 1 verse, invalid number specified
+- [ ] Expand passage with single chapter and multiple verses
+- [ ] Corner case: single chapter and multiple verses, invalid number specified
+- [ ] Expand passage with range spanning multiple chapters
+- [ ] Chapter not found for a single chapter specified
+- [ ] Chapter not found for 0-chapter volume
+- [ ] Chapter not found for range of chapters
+- [ ] Chapter not found for range spanning multiple chapters
 
 **Story Points**: 2 <br/>
 **Resolution**: UNRESOLVED <br/>
