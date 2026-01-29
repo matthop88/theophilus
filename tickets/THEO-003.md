@@ -63,7 +63,7 @@ error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 ### Acceptance Criteria:
 - [X] Error propagation
 - [X] Expand passage with single chapter, no verses specified
-- [ ] Expand passage with single 'chapter' for 0-chapter volume
+- [X] Expand passage with single 'chapter' for 0-chapter volume
 - [ ] Corner case: single chapter w.o. verses, invalid number
 - [ ] Expand passage with range of chapters, no verses specified
 - [ ] Expand passage with range of 'chapters' for 0-chapter volume
