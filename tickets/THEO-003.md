@@ -8,7 +8,7 @@ Inside app/lib/parse, we have a passageExpander.lua. It does the following:
 
 Takes a parameter list consisting of a book name, passage, and chapterCount.
 1. If passage doesn't exist, expansion looks like the following:
-{ passage = {
+{ body = {
    {  chapter = 1,
       verse   = "1-?",
    },
@@ -19,7 +19,7 @@ Takes a parameter list consisting of a book name, passage, and chapterCount.
 }}
 2. If passage exists and is on a chapter level, it looks very similar:
 e.g. passage = "2-3"
-{ passage = {
+{ body = {
    {  chapter = 2,
       verse   = "1-?",
    },
@@ -28,14 +28,14 @@ e.g. passage = "2-3"
    },
 }}
 NOTE: A book like Jude doesn't have chapters. Its chapter count is 0. In this case, a passage like 2-3 would be interpreted as:
-{ passage = {
+{ body = {
    {  chapter = 0,
       verse   = "2-3",
    },
 }}
 3. If a passage exists and spans multiple chapters, it looks like this:
 e.g. passage = "2:3-4:2"
-{ passage = {
+{ body = {
    {  chapter = 2,
       verse   = "3-?",
    },
@@ -48,7 +48,7 @@ e.g. passage = "2:3-4:2"
 }}
 4. The easiest scenario, obviously, is a specific passage that takes place in a single chapter.
 e.g. passage = "3:16-17" 
-{ passage = {
+{ body = {
    {  chapter = 3,
       verse   = "16-17",
    },
@@ -61,7 +61,7 @@ If chapters are out of bounds, this error is added to the mix:
 error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 
 ### Acceptance Criteria:
-- [ ] Error propagation
+- [X] Error propagation
 - [ ] Scenario #4
 - [ ] Scenario #3
 - [ ] Scenario #2a
