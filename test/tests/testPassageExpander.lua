@@ -25,6 +25,7 @@ return {
         
         if result.warning then resultString = resultString .. ", warning = " .. result.warning end
         if result.error   then resultString = resultString .. ", error = "   .. result.error   end
+        if result.body    then resultString = resultString .. ", body = { { chapter = " .. result.body[1].chapter .. ", verse = " .. result.body[1].verse .. " } }" end
         
         return resultString .. " }"
     end,
@@ -36,4 +37,14 @@ return {
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = nil, bookData = nil, version = nil, chapterCount = nil, passage = nil, error = INSUFFICIENT ARGUMENTS: No Arguments Given }")
     end,
+
+    testExpansionSingleChapter = function(self)
+        local name = "Passage Expansion with Single Chapter, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "3", chapterCount = 4 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = nil, version = nil, chapterCount = 4, passage = 3, body = { { chapter = 3, verse = 1-? } } }")
+    end,
+
+    -- TODO: Test with non-numeric chapter
 }
