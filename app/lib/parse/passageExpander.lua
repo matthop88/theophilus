@@ -1,3 +1,5 @@
+STRING_UTIL = require("app/lib/util/stringUtil")
+
 --[[
 Takes a parameter list consisting of:
 1. Book Name     (String)
@@ -17,13 +19,25 @@ body = {
 
 ]]
 
+local parseRange = function(r)
+	local range = STRING_UTIL:split(r)
+	if #range == 1 then
+		return { value = range[1] }
+	else
+		return { startValue = range[1], endValue = range[2] }
+	end
+end
+
 return {
 	execute = function(self, params)
 		if params.error then
 			return params
 		else
 			local result = params
-			-- Do something to result
+			local range = parseRange(params.passage)
+			if range.value then
+				result.body = { { chapter = tonumber(range.value), verse = "1-?" } }
+			end
 
 			return result
 		end
