@@ -72,4 +72,13 @@ return {
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Mark, chapterCount = 16, passage = 1-3, body = { { chapter = 1, verse = 1-? }, { chapter = 2, verse = 1-? }, { chapter = 3, verse = 1-? }, } }")
     end,
+
+    testExpansionChapterRangeForChapterlessBook = function(self)
+        local name = "Passage Expansion with Chapter Range, Chapterless Volume"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "1-3", chapterCount = 0 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 1-3, body = { { chapter = 0, verse = 1-3 }, } }")
+    end,
+
 }
