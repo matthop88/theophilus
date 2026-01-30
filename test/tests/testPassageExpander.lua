@@ -16,16 +16,19 @@ return {
 
     resultToString = function(self, result)
         local passageString = result.passage or "nil"
-        local bookDataString = "nil"
-        if result.bookData then bookDataString = "(DATA)" end
         local bookString    = "" .. (result.book or "nil")
-        local versionString = "" .. (result.version or "nil")
         local chapterCountString = "" .. (result.chapterCount or "nil")
-        local resultString = "{ book = " .. bookString .. ", bookData = " .. bookDataString .. ", version = " .. versionString .. ", chapterCount = " .. chapterCountString .. ", passage = " .. passageString
+        local resultString = "{ book = " .. bookString .. ", chapterCount = " .. chapterCountString .. ", passage = " .. passageString
         
         if result.warning then resultString = resultString .. ", warning = " .. result.warning end
         if result.error   then resultString = resultString .. ", error = "   .. result.error   end
-        if result.body    then resultString = resultString .. ", body = { { chapter = " .. result.body[1].chapter .. ", verse = " .. result.body[1].verse .. " } }" end
+        if result.body    then 
+            resultString = resultString .. ", body = {"
+            for n, elt in ipairs(result.body) do
+                resultString = resultString .. " { chapter = " .. elt.chapter .. ", verse = " .. elt.verse .. " },"
+            end
+            resultString = resultString .. " }"
+        end
         
         return resultString .. " }"
     end,
@@ -35,7 +38,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { error = "INSUFFICIENT ARGUMENTS: No Arguments Given" }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = nil, bookData = nil, version = nil, chapterCount = nil, passage = nil, error = INSUFFICIENT ARGUMENTS: No Arguments Given }")
+        return ASSERT_EQUALS(name, resultString, "{ book = nil, chapterCount = nil, passage = nil, error = INSUFFICIENT ARGUMENTS: No Arguments Given }")
     end,
 
     testExpansionSingleChapter = function(self)
@@ -43,7 +46,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "3", chapterCount = 4 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, bookData = nil, version = nil, chapterCount = 4, passage = 3, body = { { chapter = 3, verse = 1-? } } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3, body = { { chapter = 3, verse = 1-? }, } }")
     end,
 
     testExpansionSingleChapterForChapterlessBook = function(self)
@@ -51,7 +54,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "3", chapterCount = 0 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Jude, bookData = nil, version = nil, chapterCount = 0, passage = 3, body = { { chapter = 0, verse = 3 } } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 3, body = { { chapter = 0, verse = 3 }, } }")
     end,
 
     testExpansionSingleChapterInvalid = function(self)
@@ -59,6 +62,14 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Genesis", passage = "Three", chapterCount = 50 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, bookData = nil, version = nil, chapterCount = 50, passage = Three, error = INVALID VALUE: Three }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, chapterCount = 50, passage = Three, error = INVALID VALUE: Three }")
+    end,
+
+    testExpansionChapterRange = function(self)
+        local name = "Passage Expansion with Chapter Range, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Mark", passage = "1-3", chapterCount = 16 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Mark, chapterCount = 16, passage = 1-3, body = { { chapter = 1, verse = 1-? }, { chapter = 2, verse = 1-? }, { chapter = 3, verse = 1-? }, } }")
     end,
 }
