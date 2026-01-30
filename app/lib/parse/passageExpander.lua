@@ -36,10 +36,15 @@ return {
 			local result = params
 			local range = parseRange(params.passage)
 			if range.value then
-				if params.chapterCount == 0 then
-					result.body = { { chapter = 0, verse = range.value } }
+				local numericValue = tonumber(range.value)
+				if numericValue == nil then
+					result.error = "INVALID VALUE: " .. range.value
 				else
-					result.body = { { chapter = tonumber(range.value), verse = "1-?" } }
+					if params.chapterCount == 0 then
+						result.body = { { chapter = 0, verse = range.value } }
+					else
+						result.body = { { chapter = tonumber(range.value), verse = "1-?" } }
+					end
 				end
 			end
 
