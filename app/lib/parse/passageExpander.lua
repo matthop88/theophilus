@@ -47,12 +47,16 @@ return {
 					end
 				end
 			else 
-				local numericStart = tonumber(range.startValue)
-				local numericEnd   = tonumber(range.endValue)
+				if params.chapterCount == 0 then
+					result.body = { { chapter = 0, verse = params.passage } }
+				else
+					local numericStart = tonumber(range.startValue)
+					local numericEnd   = tonumber(range.endValue)
 
-				result.body = {}
-				for i = numericStart, numericEnd do
-					table.insert(result.body, { chapter = i, verse = "1-?" })
+					result.body = {}
+					for i = numericStart, numericEnd do
+						table.insert(result.body, { chapter = i, verse = "1-?" })
+					end
 				end
 			end
 
