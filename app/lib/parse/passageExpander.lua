@@ -20,7 +20,7 @@ body = {
 ]]
 
 local parseRange = function(r)
-	local range = STRING_UTIL:split(r)
+	local range = STRING_UTIL:split(r, "-")
 	if #range == 1 then
 		return { value = range[1] }
 	else
@@ -45,6 +45,14 @@ return {
 					else
 						result.body = { { chapter = tonumber(range.value), verse = "1-?" } }
 					end
+				end
+			else 
+				local numericStart = tonumber(range.startValue)
+				local numericEnd   = tonumber(range.endValue)
+
+				result.body = {}
+				for i = numericStart, numericEnd do
+					table.insert(result.body, { chapter = i, verse = "1-?" })
 				end
 			end
 
