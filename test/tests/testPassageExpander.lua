@@ -54,6 +54,11 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Jude, bookData = nil, version = nil, chapterCount = 0, passage = 3, body = { { chapter = 0, verse = 3 } } }")
     end,
 
+    testExpansionSingleChapterInvalid = function(self)
+        local name = "Passage Expansion with Bad Single Value, Unhappy Path"
 
-    -- TODO: Test with non-numeric chapter
+        local result = PASSAGE_EXPANDER:execute { book = "Genesis", passage = "Three", chapterCount = 50 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, bookData = nil, version = nil, chapterCount = 50, passage = Three, error = INVALID VALUE: Three }")
+    end,
 }
