@@ -33,14 +33,17 @@ return {
 		if params.error then
 			return params
 		else
+			local passage = params.passage or "1-?"
 			local result = params
-			local range = parseRange(params.passage)
+			local range = parseRange(passage)
 			if params.chapterCount == 0 then
-				result.body = { { chapter = 0, verse = params.passage } }
+				result.body = { { chapter = 0, verse = passage } }
 			else
 				local numericStart = tonumber(range.startValue)
 				local numericEnd   = tonumber(range.endValue)
 
+				if range.endValue == "?" then numericEnd = params.chapterCount end
+				
 				if numericStart == nil or numericEnd == nil then
 					result.error = "INVALID VALUE in passage: " .. params.passage
 				else
