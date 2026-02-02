@@ -62,7 +62,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Genesis", passage = "Three", chapterCount = 50 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, chapterCount = 50, passage = Three, error = INVALID VALUE: Three }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, chapterCount = 50, passage = Three, error = INVALID VALUE in passage: Three }")
     end,
 
     testExpansionChapterRange = function(self)
@@ -79,6 +79,14 @@ return {
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "1-3", chapterCount = 0 }
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 1-3, body = { { chapter = 0, verse = 1-3 }, } }")
+    end,
+
+    testExpansionChapterRangeInvalid = function(self)
+        local name = "Passage Expansion with Bad Value in Range, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "James", passage = "1:3-4a", chapterCount = 5 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = James, chapterCount = 5, passage = 1:3-4a, error = INVALID VALUE in passage: 1:3-4a }")
     end,
 
 }
