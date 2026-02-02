@@ -24,7 +24,7 @@ local parseRange = function(r)
 	if #range == 1 then
 		return { startValue = range[1], endValue = range[1] }
 	else
-		return { startValue = range[1], endValue = range[2] }
+		return { startValue = range[1], endValue = range[2], extra = range[3] }
 	end
 end
 
@@ -36,20 +36,26 @@ return {
 			local passage = params.passage or "1-?"
 			local result = params
 			local range = parseRange(passage)
-			if params.chapterCount == 0 then
-				result.body = { { chapter = 0, verse = passage } }
+			if range.extra then
+				result.error = "INVALID RANGE: " .. passage
 			else
-				local numericStart = tonumber(range.startValue)
-				local numericEnd   = tonumber(range.endValue)
-
-				if range.endValue == "?" then numericEnd = params.chapterCount end
-				
-				if numericStart == nil or numericEnd == nil then
-					result.error = "INVALID VALUE in passage: " .. params.passage
+				if params.chapterCount == 0 then
+					result.body = { { chapter = 0, verse = passage } }
 				else
-					result.body = {}
-					for i = numericStart, numericEnd do
-						table.insert(result.body, { chapter = i, verse = "1-?" })
+					local numericStart = tonumber(range.startValue)
+					local numericEnd   = tonumber(range.endValue)
+
+					if range.endValue == "?" then numericEnd = params.chapterCount end
+					
+					if numericStart == nil or numericEnd == nil then
+						result.error = "INVALID VALUE in passage: " .. passage
+					elseif numericStart > numericEnd then
+						result.error = "INVALID RANGE: " .. numericStart .. "-" .. numericEnd
+					else
+						result.body = {}
+						for i = numericStart, numericEnd do
+							table.insert(result.body, { chapter = i, verse = "1-?" })
+						end
 					end
 				end
 			end
