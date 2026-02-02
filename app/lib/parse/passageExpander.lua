@@ -22,7 +22,7 @@ body = {
 local parseRange = function(r)
 	local range = STRING_UTIL:split(r, "-")
 	if #range == 1 then
-		return { value = range[1] }
+		return { startValue = range[1], endValue = range[1] }
 	else
 		return { startValue = range[1], endValue = range[2] }
 	end
@@ -35,24 +35,15 @@ return {
 		else
 			local result = params
 			local range = parseRange(params.passage)
-			if range.value then
-				local numericValue = tonumber(range.value)
-				if numericValue == nil then
-					result.error = "INVALID VALUE: " .. range.value
-				else
-					if params.chapterCount == 0 then
-						result.body = { { chapter = 0, verse = range.value } }
-					else
-						result.body = { { chapter = tonumber(range.value), verse = "1-?" } }
-					end
-				end
-			else 
-				if params.chapterCount == 0 then
-					result.body = { { chapter = 0, verse = params.passage } }
-				else
-					local numericStart = tonumber(range.startValue)
-					local numericEnd   = tonumber(range.endValue)
+			if params.chapterCount == 0 then
+				result.body = { { chapter = 0, verse = params.passage } }
+			else
+				local numericStart = tonumber(range.startValue)
+				local numericEnd   = tonumber(range.endValue)
 
+				if numericStart == nil or numericEnd == nil then
+					result.error = "INVALID VALUE in passage: " .. params.passage
+				else
 					result.body = {}
 					for i = numericStart, numericEnd do
 						table.insert(result.body, { chapter = i, verse = "1-?" })
