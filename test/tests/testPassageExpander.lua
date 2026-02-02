@@ -117,4 +117,20 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3-?, body = { { chapter = 3, verse = 1-? }, { chapter = 4, verse = 1-? }, } }")
     end,
 
+    testExpansionChapterRangeWithInvalidRange = function(self)
+        local name = "Passage Expansion for Invalid Chapter Range, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "5-?", chapterCount = 4 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 5-?, error = INVALID RANGE: 5-4 }")
+    end,
+
+    testExpansionChapterRangeWithInvalidRangeExtra = function(self)
+        local name = "Passage Expansion for Invalid Chapter Range Extra, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "2-3-4", chapterCount = 4 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 2-3-4, error = INVALID RANGE: 2-3-4 }")
+    end,
+
 }
