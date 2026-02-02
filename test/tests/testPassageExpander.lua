@@ -89,4 +89,32 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = James, chapterCount = 5, passage = 1:3-4a, error = INVALID VALUE in passage: 1:3-4a }")
     end,
 
+    testExpansionNoPassage = function(self)
+        local name = "Passage Expansion for No Passage, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "John", passage = nil, chapterCount = 21 }
+        local resultString = self:resultToString(result)
+        local chaptersString = ""
+        for i = 1, 21 do
+            chaptersString = chaptersString .. "{ chapter = " .. i .. ", verse = 1-? }, "
+        end
+        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = nil, body = { " .. chaptersString .. "} }")
+    end,
+ 
+    testExpansionNoPassageChapterless = function(self)
+        local name = "Passage Expansion for No Passage, Chapterless Volume, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = nil, chapterCount = 0 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = nil, body = { { chapter = 0, verse = 1-? }, } }")
+    end,
+
+    testExpansionChapterRangeWithWildcard = function(self)
+        local name = "Passage Expansion for Chapter Range with Wildcard, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "3-?", chapterCount = 4 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3-?, body = { { chapter = 3, verse = 1-? }, { chapter = 4, verse = 1-? }, } }")
+    end,
+
 }
