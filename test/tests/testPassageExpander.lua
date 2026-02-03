@@ -160,9 +160,18 @@ return {
     testExpansionChapterAndMultipleVersesBad = function(self)
         local name = "Passage Expansion for Chapter and Multiple Verses, Unhappy Path"
 
-        local result = PASSAGE_EXPANDER:execute { book = "Ephesians", passage = "2:8-9b", chapterCount = 6 }
+        local result = PASSAGE_EXPANDER:execute { book = "Ephesians", passage = "2Z:8-9", chapterCount = 6 }
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2Z:8-9, error = INVALID VALUE in passage: 2Z:8-9 }")
     end,
+
+    testExpansionCrossingMultipleChapters = function(self)
+        local name = "Passage Expansion for Verse Range Spanning Multiple Chapters, Happy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Lamentations", passage = "3:55-5:2", chapterCount = 5 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Lamentations, chapterCount = 5, passage = 3:55-5:2, body = { { chapter = 3, verse = 55-? }, { chapter = 4, verse = 1-? }, { chapter = 5, verse = 1-2 }, } }")
+    end,
+
 
 }
