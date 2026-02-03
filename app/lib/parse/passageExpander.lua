@@ -28,6 +28,48 @@ local parseRange = function(r)
 	end
 end
 
+local parseHM = function(h)
+	local hm = STRING_UTIL:split(h, ":")
+	if #hm == 1 then
+		return { v = hm[1] }
+	else
+		return { h = hm[1], m = hm[2], x = hm[3] }
+	end
+end
+
+local parsePassage = function(p)
+	local range = parseRange(p)
+	
+	local startPosition = parseHM(range.startValue)
+	local startingChapter, startingVerse
+	if startPosition.v then startingChapter = startPosition.v
+	else                    startingChapter, startingVerse = startPosition.h, startPosition.m end
+
+	local endPosition = parseHM(range.endValue)
+	if endPosition == nil then endPosition = startPosition end
+
+	local endingChapter, endingVerse
+	if endPosition.v then 
+		if startPosition.v then endingChapter = endPosition.v
+		else                    endingChapter, endingVerse = startingChapter, endPosition.v end
+	else                  
+		endingChapter, endingVerse = endPosition.h, endPosition.m 
+	end
+
+	local result =  { 
+		startingChapter = startingChapter,
+		startingVerse   = startingVerse,
+		endingChapter   = endingChapter,
+		endingVerse     = endingVerse,
+	}
+
+	if range.extra or startPosition.x or endPosition.x then
+		result.error = "INVALID RANGE: " .. p
+	end
+
+	return result
+end
+
 return {
 	execute = function(self, params)
 		if params.error then
@@ -35,26 +77,44 @@ return {
 		else
 			local passage = params.passage or "1-?"
 			local result = params
-			local range = parseRange(passage)
-			if range.extra then
-				result.error = "INVALID RANGE: " .. passage
+			local passageAttributes = parsePassage(passage)
+			if passageAttributes.error then
+				result.error = passageAttributes.error
 			else
 				if params.chapterCount == 0 then
-					result.body = { { chapter = 0, verse = passage } }
-				else
-					local numericStart = tonumber(range.startValue)
-					local numericEnd   = tonumber(range.endValue)
-
-					if range.endValue == "?" then numericEnd = params.chapterCount end
-					
-					if numericStart == nil or numericEnd == nil then
-						result.error = "INVALID VALUE in passage: " .. passage
-					elseif numericStart > numericEnd then
-						result.error = "INVALID RANGE: " .. numericStart .. "-" .. numericEnd
+					if passageAttributes.startingVerse or passageAttributes.endingVerse then
+						result.error = "INVALID RANGE: " .. passage .. " not applicable for chapterless volume"
 					else
+						result.body = { { chapter = 0, verse = passage } }
+					end
+				else
+					local startingChapterNum = tonumber(passageAttributes.startingChapter)
+					local endingChapterNum   = tonumber(passageAttributes.endingChapter)
+
+					if passageAttributes.endingChapter == "?" then endingChapterNum = params.chapterCount end
+					
+					local startingVerseNum = tonumber(passageAttributes.startingVerse)
+					local endingVerseNum   = tonumber(passageAttributes.endingVerse)
+
+					if   startingChapterNum == nil or endingChapterNum == nil 
+					  or (startingVerseNum == nil and passageAttributes.startingVerse ~= nil)
+					  or (endingVerseNum   == nil and passageAttributes.endingVerse   ~= nil) then
+						result.error = "INVALID VALUE in passage: " .. passage
+					elseif startingChapterNum > endingChapterNum then
+						result.error = "INVALID RANGE: " .. startingChapterNum .. "-" .. endingChapterNum
+					else
+						if startingVerseNum == nil then startingVerseNum = 1 end
+						if endingVerseNum   == nil then endingVerseNum = "?" end
+
 						result.body = {}
-						for i = numericStart, numericEnd do
-							table.insert(result.body, { chapter = i, verse = "1-?" })
+						for i = startingChapterNum, endingChapterNum do
+							local s, e = 1, "?"
+							if i == startingChapterNum then s = startingVerseNum end
+							if i == endingChapterNum   then e = endingVerseNum   end
+
+							local verse = "" .. s .. "-" .. e
+							if s == e then verse = "" .. s end
+							table.insert(result.body, { chapter = i, verse = verse })
 						end
 					end
 				end
