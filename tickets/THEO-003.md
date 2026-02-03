@@ -77,9 +77,10 @@ error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 - [X] Corner case: single chapter and multiple verses, invalid number specified
 - [X] Expand passage with range spanning multiple chapters
 - [X] Chapter not found for a single chapter specified
-- [ ] Chapter not found for 0-chapter volume
-- [ ] Chapter not found for range of chapters
-- [ ] Chapter not found for range spanning multiple chapters
+- [X] Chapter not found for 0-chapter volume
+- [X] Chapter not found for range of chapters
+- [X] Chapter not found for range spanning multiple chapters
+- [ ] Integrated into main interface
 
 **Story Points**: 2 <br/>
 **Resolution**: UNRESOLVED <br/>
