@@ -70,6 +70,30 @@ local parsePassage = function(p)
 	return result
 end
 
+local validateChapterRange = function(data)
+	if not data.error then
+		local missingChapterRange = { lo = nil, hi = nil }
+
+		for _, chapterVerse in ipairs(data.body) do
+			if chapterVerse.chapter > data.chapterCount then
+				if missingChapterRange.lo == nil then missingChapterRange.lo = chapterVerse.chapter end
+				missingChapterRange.hi = chapterVerse.chapter
+			end
+		end
+
+		if missingChapterRange.lo ~= nil then
+			if missingChapterRange.lo == missingChapterRange.hi then
+				data.error = "INVALID CHAPTER: " .. missingChapterRange.lo
+			else
+				data.error = "INVALID CHAPTERS: " .. missingChapterRange.lo .. "-" .. missingChapterRange.hi
+			end
+			data.body = nil
+		end
+	end
+
+	return data
+end
+
 return {
 	execute = function(self, params)
 		if params.error then
@@ -120,7 +144,7 @@ return {
 				end
 			end
 
-			return result
+			return validateChapterRange(result)
 		end
 	end,
 }
