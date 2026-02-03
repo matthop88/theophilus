@@ -181,5 +181,44 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Psalm, chapterCount = 150, passage = 151, error = INVALID CHAPTER: 151 }")
     end,
 
+    testExpansionInvalidChapterForChapterlessBook = function(self)
+        local name = "Passage Expansion for Invalid Chapter for Chapterless Volume, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Philemon", passage = "2:3", chapterCount = 0 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philemon, chapterCount = 0, passage = 2:3, error = INVALID RANGE: 2:3 not applicable for chapterless volume }")
+    end,
+
+    testExpansionInvalidChapterAmongRangeOfChapters = function(self)
+        local name = "Passage Expansion for Invalid Chapter among Range of Chapters, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Genesis", passage = "49-51", chapterCount = 50 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Genesis, chapterCount = 50, passage = 49-51, error = INVALID CHAPTER: 51 }")
+    end,
+
+    testExpansionInvalidChaptersAmongRangeOfChapters = function(self)
+        local name = "Passage Expansion for Invalid Chapters among Range of Chapters, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Ephesians", passage = "5-9", chapterCount = 6 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 5-9, error = INVALID CHAPTERS: 7-9 }")
+    end,
+
+    testExpansionInvalidChapterInPassageSpanningMultipleChapters = function(self)
+        local name = "Passage Expansion for Invalid Chapter in Passage Spanning Multiple Chapters, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Romans", passage = "16:10-17:2", chapterCount = 16 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Romans, chapterCount = 16, passage = 16:10-17:2, error = INVALID CHAPTER: 17 }")
+    end,
+
+    testExpansionInvalidChaptersInPassageSpanningMultipleChapters = function(self)
+        local name = "Passage Expansion for Invalid Chapters in Passage Spanning Multiple Chapters, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Proverbs", passage = "29:3-34:13", chapterCount = 31 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Proverbs, chapterCount = 31, passage = 29:3-34:13, error = INVALID CHAPTERS: 32-34 }")
+    end,
 
 }
