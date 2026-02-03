@@ -76,7 +76,7 @@ error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 - [X] Expand passage with single chapter and multiple verses
 - [X] Corner case: single chapter and multiple verses, invalid number specified
 - [X] Expand passage with range spanning multiple chapters
-- [ ] Chapter not found for a single chapter specified
+- [X] Chapter not found for a single chapter specified
 - [ ] Chapter not found for 0-chapter volume
 - [ ] Chapter not found for range of chapters
 - [ ] Chapter not found for range spanning multiple chapters
