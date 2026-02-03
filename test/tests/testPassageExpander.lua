@@ -157,4 +157,12 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2:8-9, body = { { chapter = 2, verse = 8-9 }, } }")
     end,
 
+    testExpansionChapterAndMultipleVersesBad = function(self)
+        local name = "Passage Expansion for Chapter and Multiple Verses, Unhappy Path"
+
+        local result = PASSAGE_EXPANDER:execute { book = "Ephesians", passage = "2:8-9b", chapterCount = 6 }
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2Z:8-9, error = INVALID VALUE in passage: 2Z:8-9 }")
+    end,
+
 }
