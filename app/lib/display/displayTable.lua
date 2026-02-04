@@ -1,11 +1,20 @@
--- XXX: This is overly simplistic, but works for now
+local printTable
+
+printTable = function(t, indentString, prefaceString)
+	if prefaceString == "" then prefaceString = indentString end
+	print(prefaceString .. "{")
+	for k, v in pairs(t) do
+		local valueString = v
+		if type(valueString) == "string" then valueString = "\"" .. valueString .. "\"" end
+		local keyString = k .. " = "
+		if type(k) == "number" then keyString = "" end
+		if type(v) == "table" then printTable(v, indentString .. "  ", keyString)
+		else                       print(indentString .. "  " .. keyString .. valueString .. ",") end
+	end
+	if indentString == "" then print(indentString .. "}")
+	else                       print(indentString .. "},") end
+end
 
 return function(myTable)
-	print("{")
-	for k, v in pairs(myTable) do
-		local valueString = v
-		if type(v) == "table" then valueString = "(TABLE DATA)" end
-		print("  " .. k .. " = \"" .. valueString .. "\",")
-	end
-	print("}")
+	printTable(myTable, "", "")
 end
