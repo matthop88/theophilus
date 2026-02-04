@@ -1,8 +1,7 @@
 local printTable
 
 printTable = function(t, indentString, prefaceString)
-	if prefaceString == "" then prefaceString = indentString end
-	print(prefaceString .. "{")
+	print(indentString .. prefaceString .. "{")
 	for k, v in pairs(t) do
 		local valueString = v
 		if type(valueString) == "string" then valueString = "\"" .. valueString .. "\"" end
