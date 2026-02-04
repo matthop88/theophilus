@@ -80,12 +80,12 @@ error = { CHAPTERS_NOT_FOUND { book = "{Book Name}", chapters = "x-y" } }
 - [X] Chapter not found for 0-chapter volume
 - [X] Chapter not found for range of chapters
 - [X] Chapter not found for range spanning multiple chapters
-- [ ] Integrated into main interface
+- [X] Integrated into main interface
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 3 <br/>
 
 **Dates**: <br/>
 **Created**: 01/29/26 10:04 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 02/03/26 04:14 pm <br/>
