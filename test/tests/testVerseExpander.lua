@@ -1,6 +1,40 @@
 local VERSE_EXPANDER = require("app/lib/parse/verseExpander")
 local ASSERT_EQUALS    = require("test/framework/assert/assertEquals")
 
+local PHILIPPIANS = {
+    book         = "Philippians",
+    chapterCount = 4,
+    version      = "NASB 95",
+    chapters     = {
+        {   chapter    = 1,
+            verseCount = 30,
+            verses = { },
+        },
+    },
+}
+
+local EPHESIANS = {
+    book = "Ephesians",
+    chapterCount = 6,
+    version      = "NASB 95",
+    chapters     = {   
+        {   chapter    = 1,
+            verseCount = 23,
+            verses     = { },
+        },
+        {  
+            chapter    = 2,
+            verseCount = 22,
+            verses     = { },
+        },
+        {  
+            chapter    = 3,
+            verseCount = 21,
+            verses     = { },
+        },
+    },
+}
+
 return {
     getName = function(self) 
         return "Verse Expander tests"
@@ -47,67 +81,65 @@ return {
         local name = "Verse Expansion with Missing Chapter, Single Warning, Happy Path"
 
         local data = {
-            body = {
-                {
-                    verse = "8-9",
-                    chapter = 2,
-                },
-            },
-            book = "Ephesians",
-            passage = "2:8-9",
-            chapterCount = 6,
-            bookData = {
-                book = "Ephesians",
-                chapterCount = 6,
-                version      = "NASB 95",
-                chapters     = { }
-            },
+            book = "Philippians",
+            passage = "4:4",
+            chapterCount = 4,
+            bookData = PHILIPPIANS,
+            body = { { chapter = 4, verse = 4, }, },
         }
 
         local result = VERSE_EXPANDER:execute(data)
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2:8-9, body = { { chapter = 2, verse = 8-9, warning = Ephesians Chapter 2 is missing from the dataset }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 4:4, body = { { chapter = 4, verse = 4, warning = Philippians Chapter 4 is missing from the dataset }, } }")
     end,
 
     testExpansionSingleWildcardSuccess = function(self)
         local name = "Verse Expansion with Single Wildcard, Happy Path"
 
         local data = {
-            body = {
-                {
-                    chapter = 1,
-                    verse = "18-?",
-                },
-                {  
-                    chapter = 2,
-                    verse = "1-9",
-                },
-            },
             book = "Ephesians",
             passage = "1:18-2:9",
             chapterCount = 6,
-            bookData = {
-                book = "Ephesians",
-                chapterCount = 6,
-                version      = "NASB 95",
-                chapters     = {   
-                    {   
-                        chapter    = 1,
-                        verseCount = 23,
-                        verses     = { },
-                    },
-                    {  
-                        chapter    = 2,
-                        verseCount = 23,
-                        verses     = { },
-                    },
-                },
-            },
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "18-?", }, { chapter = 2, verse = "1-9", }, },
         }
 
         local result = VERSE_EXPANDER:execute(data)
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:18-2:9, body = { { chapter = 1, verse = 18-23 }, { chapter = 2, verse = 1-9 }, } }")
     end,
+
+    testExpansionMultipleWildcardSuccess = function(self)
+        local name = "Verse Expansion with Multiple Wildcards, Happy Path"
+
+        local data = {
+            book = "Ephesians",
+            passage = "1:18-3:3",
+            chapterCount = 6,
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "18-?", }, { chapter = 2, verse = "1-?", }, { chapter = 3, verse = "1-3", }, },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:18-3:3, body = { { chapter = 1, verse = 18-23 }, { chapter = 2, verse = 1-22 }, { chapter = 3, verse = 1-3 }, } }")
+    end,
+
+    testExpansionMultipleWarningsSuccess = function(self)
+        local name = "Verse Expansion with Multiple Warnings, Happy Path"
+
+        local data = {
+            book = "Philippians",
+            passage = "3:5-4:4",
+            chapterCount = 4,
+            bookData = PHILIPPIANS,
+            body = { { chapter = 3, verse = "5-?", }, { chapter = 4, verse = "1-4", }, },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3:5-4:4, body = { { chapter = 3, verse = 5-?, warning = Philippians Chapter 3 is missing from the dataset }, { chapter = 4, verse = 1-4, warning = Philippians Chapter 4 is missing from the dataset }, } }")
+    end,
+
 
 }
