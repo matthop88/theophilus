@@ -14,6 +14,17 @@ return {
 		if params.error then
 			return params
 		else
+			for _, elt in ipairs(params.body) do
+				local foundChapter = false
+				for _, c in ipairs(params.bookData.chapters) do
+					if c.chapter == elt.chapter then
+						foundChapter = true
+					end
+				end
+				if not foundChapter then
+					elt.warning = params.book .. " Chapter " .. elt.chapter .. " is missing from the dataset"
+				end
+			end
 			local result = params
 			return result
 		end
