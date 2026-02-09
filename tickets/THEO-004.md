@@ -134,8 +134,8 @@ If both Philippians chapter 1 and 2 are intact in the dataset, result will be
 - [X] Test for 1 warning
 - [X] Verse Expander fills in wildcards
 - [X] Test for 1 wildcard
-- [ ] Test for multiple wildcards
-- [ ] Test for multiple warnings
+- [X] Test for multiple wildcards
+- [X] Test for multiple warnings
 - [ ] Verse Expander adds error
 - [ ] Test for 1 error
 - [ ] Test for multiple errors
