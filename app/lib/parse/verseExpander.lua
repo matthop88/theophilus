@@ -1,3 +1,5 @@
+local STRING_UTIL = require("app/lib/util/stringUtil")
+
 --[[
 Takes a parameter list consisting of:
 1. Book Data  (Table)
@@ -19,6 +21,9 @@ return {
 				for _, c in ipairs(params.bookData.chapters) do
 					if c.chapter == elt.chapter then
 						foundChapter = true
+						if STRING_UTIL:endsWith(elt.verse, "?") then
+							elt.verse = string.sub(elt.verse, 1, string.len(elt.verse) - 1) .. c.verseCount
+						end
 					end
 				end
 				if not foundChapter then
