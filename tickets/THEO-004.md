@@ -128,7 +128,7 @@ If both Philippians chapter 1 and 2 are intact in the dataset, result will be
 }
 
 ### Acceptance Criteria:
-- [ ] Verse Expander implemented, propagates errors
+- [X] Verse Expander implemented, propagates errors
 - [ ] Test for error propagation
 - [ ] Implement addition of warnings for missing chapters
 - [ ] Test for 1 warning
