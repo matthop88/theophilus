@@ -132,8 +132,8 @@ If both Philippians chapter 1 and 2 are intact in the dataset, result will be
 - [X] Test for error propagation
 - [X] Implement addition of warnings for missing chapters
 - [X] Test for 1 warning
-- [ ] Verse Expander fills in wildcards
-- [ ] Test for 1 wildcard
+- [X] Verse Expander fills in wildcards
+- [X] Test for 1 wildcard
 - [ ] Test for multiple wildcards
 - [ ] Test for multiple warnings
 - [ ] Verse Expander adds error
