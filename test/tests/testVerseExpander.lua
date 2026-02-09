@@ -107,7 +107,7 @@ return {
 
         local result = VERSE_EXPANDER:execute(data)
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:18-2:9, body = { { chapter = 1, verse = 18-23 }, { chapter= 2, verse = 1-9 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:18-2:9, body = { { chapter = 1, verse = 18-23 }, { chapter = 2, verse = 1-9 }, } }")
     end,
 
 }
