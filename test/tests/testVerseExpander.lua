@@ -25,7 +25,9 @@ return {
         if result.body    then 
             resultString = resultString .. ", body = {"
             for n, elt in ipairs(result.body) do
-                resultString = resultString .. " { chapter = " .. elt.chapter .. ", verse = " .. elt.verse .. " },"
+                resultString = resultString .. " { chapter = " .. elt.chapter .. ", verse = " .. elt.verse
+                    if elt.warning then resultString = resultString .. ", warning = " .. elt.warning end
+                resultString = resultString .. " },"
             end
             resultString = resultString .. " }"
         end
@@ -41,5 +43,30 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = nil, chapterCount = nil, passage = nil, error = INSUFFICIENT ARGUMENTS: No Arguments Given }")
     end,
 
+    testExpansionSingleWarningSuccess = function(self)
+        local name = "Verse Expansion with Missing Chapter, Single Warning, Happy Path"
+
+        local data = {
+            body = {
+                {
+                    verse = "8-9",
+                    chapter = 2,
+                },
+            },
+            book = "Ephesians",
+            passage = "2:8-9",
+            chapterCount = 6,
+            bookData = {
+                book = "Ephesians",
+                chapterCount = 6,
+                version      = "NASB 95",
+                chapters     = { }
+            },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2:8-9, body = { { chapter = 2, verse = 8-9, warning = Ephesians Chapter 2 is missing from the dataset }, } }")
+    end,
 
 }
