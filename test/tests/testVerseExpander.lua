@@ -156,4 +156,52 @@ return {
         local resultString = self:resultToString(result)
         return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:24, error = The following verses are out of range: Ephesians 1:24, body = { { chapter = 1, verse = 24 }, } }") 
     end,
+
+    testExpansionOutOfRangeClosingVerseFailure = function(self)
+        local name = "Verse Expansion with Multiple Verses Out of Range Closing Verse Error, Unhappy Path"
+
+        local data = {
+            book = "Ephesians",
+            passage = "1:16-27",
+            chapterCount = 6,
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "16-27", } },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:16-27, error = The following verses are out of range: Ephesians 1:24-27, body = { { chapter = 1, verse = 16-27 }, } }") 
+    end,
+
+    testExpansionOutOfRangeOpeningVerseFailure = function(self)
+        local name = "Verse Expansion with Multiple Verses Out of Range Opening Verse Error, Unhappy Path"
+
+        local data = {
+            book = "Ephesians",
+            passage = "1:29",
+            chapterCount = 6,
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "29", } },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:29, error = The following verses are out of range: Ephesians 1:24-29, body = { { chapter = 1, verse = 29 }, } }") 
+    end,
+
+    testExpansionOutOfRangeMultipleErrorsFailure = function(self)
+        local name = "Verse Expansion with Multiple Errors, Unhappy Path"
+
+        local data = {
+            book = "Ephesians",
+            passage = "1:25-2:27",
+            chapterCount = 6,
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "25-?", }, { chapter = 2, verse = "1-27", } },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:25-2:27, error = The following verses are out of range: Ephesians 1:24-25, Ephesians 2:23-27, body = { { chapter = 1, verse = 25-23 }, { chapter = 2, verse = 1-27 }, } }") 
+    end,
 }
