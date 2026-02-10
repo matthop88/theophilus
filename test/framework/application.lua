@@ -5,9 +5,18 @@ local printCaption = function(str)
     print("\n" .. str .. "\n" .. string.rep("-", string.len(str)))
 end
 
+local printBanner = function(str)
+    local asteriskStr = string.rep("*", string.len(str) + 12)
+    print(asteriskStr)
+    print("***   " .. str .. "   ***")
+    print(asteriskStr)
+end
+
 local testClasses = DISCOVER_TEST_CLASSES()
 
 print()
+
+local totalSuccessfulTests, totalTestCount = 0, 0
 
 for n, testClass in ipairs(testClasses) do
     printCaption(testClass:getName())
@@ -34,10 +43,11 @@ for n, testClass in ipairs(testClasses) do
 
     print()
     print("Tests succeeded: " .. successfulTests .. " out of " .. testCount)
+    totalSuccessfulTests = totalSuccessfulTests + successfulTests
+    totalTestCount       = totalTestCount       + testCount
+
     if #failedTests > 0 then
-        print()
-        print("The following tests have failed:")
-        print("--------------------------------")
+        printCaption("The following tests have failed:")
         for n, t in ipairs(failedTests) do
             print(n .. ". " .. t)
         end
@@ -45,5 +55,12 @@ for n, testClass in ipairs(testClasses) do
 end
 
 print()
+printBanner("Total Tests Succeeded: " .. totalSuccessfulTests .. " Out Of " .. totalTestCount)
+print()
+
+if totalSuccessfulTests ~= totalTestCount then
+    print("DANGER: THERE ARE " .. (totalTestCount - totalSuccessfulTests) .. " FAILING TESTS!")
+    print()
+end
 
 love.event.quit()
