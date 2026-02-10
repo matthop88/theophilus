@@ -141,5 +141,19 @@ return {
         return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3:5-4:4, body = { { chapter = 3, verse = 5-?, warning = Philippians Chapter 3 is missing from the dataset }, { chapter = 4, verse = 1-4, warning = Philippians Chapter 4 is missing from the dataset }, } }")
     end,
 
+    testExpansionOutOfRangeVerseFailure = function(self)
+        local name = "Verse Expansion with Single Verse Out of Range Error, Unhappy Path"
 
+        local data = {
+            book = "Ephesians",
+            passage = "1:24",
+            chapterCount = 6,
+            bookData = EPHESIANS,
+            body = { { chapter = 1, verse = "24", } },
+        }
+
+        local result = VERSE_EXPANDER:execute(data)
+        local resultString = self:resultToString(result)
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 1:24, error = The following verses are out of range: Ephesians 1:24, body = { { chapter = 1, verse = 24 }, } }") 
+    end,
 }
