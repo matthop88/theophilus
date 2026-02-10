@@ -140,13 +140,13 @@ If both Philippians chapter 1 and 2 are intact in the dataset, result will be
 - [X] Test for 1 error, single verse
 - [X] Test for 1 error, multiple verses
 - [X] Test for multiple errors
-- [ ] Integrated into main interface
+- [X] Integrated into main interface
 
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 3 <br/>
 
 **Dates**: <br/>
 **Created**: 02/04/26 11:34 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 02/09/26 04:35 pm <br/>
