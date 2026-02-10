@@ -28,13 +28,13 @@ Passage Expansion for Chapter and Verse, Happy Path
 ### Acceptance Criteria:
 - [X] Per group summary on succeeded tests
 - [X] List of failed tests per group
-- [ ] Summary on all tests
-- [ ] Failed tests summarized at end, aggregated by group
+- [X] Summary on all tests
+- [X] Failed tests summarized at end
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 3 <br/>
 
 **Dates**: <br/>
 **Created**: 02/10/26 10:58 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 02/10/26 12:09 pm <br/>
