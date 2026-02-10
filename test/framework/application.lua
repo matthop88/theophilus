@@ -13,15 +13,22 @@ for n, testClass in ipairs(testClasses) do
     printCaption(testClass:getName())
 
     local testFunctions = DISCOVER_TEST_FUNCTIONS(testClass)
+    local testCount, successfulTests = 0, 0
     for testName, testFn in pairs(testFunctions) do
+        testCount = testCount + 1
         local status, err = pcall(function() testFn(testClass) end)
-        if status ~= true then
+        if status == true then
+            successfulTests = successfulTests + 1
+        else
             print()
             print("FAILED => " .. testName)
             print("          WITH ERROR: " .. err)
             print()
         end
     end 
+
+    print()
+    print("Tests succeeded: " .. successfulTests .. " out of " .. testCount)
 end
 
 print()
