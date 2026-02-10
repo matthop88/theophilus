@@ -2,7 +2,7 @@ local ASTERISKS = require("test/framework/const/asterisks")
 
 local passedResult = function(name)
 	print("PASSED => " .. name)
-	return true
+	return { name = name, succeeded = true }
 end
 
 local failedResult = function(name, actual, expected)
@@ -10,7 +10,7 @@ local failedResult = function(name, actual, expected)
     print("  Expected: ", expected)
     print("  Actual: ",   actual)
     print(ASTERISKS)
-    return false
+    return { name = name, succeeded = false }
 end
 
 return function(name, actual, expected)
