@@ -26,7 +26,7 @@ Passage Expansion for Chapter and Verse, Happy Path
 4. If any tests have failed, a list of failed tests follows, including which group they belong to.
 
 ### Acceptance Criteria:
-- [ ] Per group summary on succeeded tests
+- [X] Per group summary on succeeded tests
 - [ ] List of failed tests per group
 - [ ] Summary on all tests
 - [ ] Failed tests summarized at end, aggregated by group
