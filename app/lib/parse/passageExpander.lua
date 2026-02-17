@@ -8,9 +8,9 @@ Takes a parameter list consisting of:
 
 If the parameter list contains an ERROR, the parameter list is returned as is.
 
-The parameter list is modified in place; the string passage is preserved, but a new parameter (body) is added.
+The parameter list is modified in place; the string passage is preserved, but a new parameter (request) is added.
 
-body = {
+request = {
 	{ chapter = (Number),
 	  verse   = (Hyphen-delimited String range),
 	},
@@ -74,7 +74,7 @@ local validateChapterRange = function(data)
 	if not data.error then
 		local missingChapterRange = { lo = nil, hi = nil }
 
-		for _, chapterVerse in ipairs(data.body) do
+		for _, chapterVerse in ipairs(data.request) do
 			if chapterVerse.chapter > data.chapterCount then
 				if missingChapterRange.lo == nil then missingChapterRange.lo = chapterVerse.chapter end
 				missingChapterRange.hi = chapterVerse.chapter
@@ -87,7 +87,7 @@ local validateChapterRange = function(data)
 			else
 				data.error = "INVALID CHAPTERS: " .. missingChapterRange.lo .. "-" .. missingChapterRange.hi
 			end
-			data.body = nil
+			data.request = nil
 		end
 	end
 
@@ -109,7 +109,7 @@ return {
 					if passageAttributes.startingVerse or passageAttributes.endingVerse then
 						result.error = "INVALID RANGE: " .. passage .. " not applicable for chapterless volume"
 					else
-						result.body = { { chapter = 0, verse = passage } }
+						result.request = { { chapter = 0, verse = passage } }
 					end
 				else
 					local startingChapterNum = tonumber(passageAttributes.startingChapter)
@@ -130,7 +130,7 @@ return {
 						if startingVerseNum == nil then startingVerseNum = 1 end
 						if endingVerseNum   == nil then endingVerseNum = "?" end
 
-						result.body = {}
+						result.request = {}
 						for i = startingChapterNum, endingChapterNum do
 							local s, e = 1, "?"
 							if i == startingChapterNum then s = startingVerseNum end
@@ -138,7 +138,7 @@ return {
 
 							local verse = "" .. s .. "-" .. e
 							if s == e then verse = "" .. s end
-							table.insert(result.body, { chapter = i, verse = verse })
+							table.insert(result.request, { chapter = i, verse = verse })
 						end
 					end
 				end

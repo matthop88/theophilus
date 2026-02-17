@@ -3,7 +3,7 @@ local STRING_UTIL = require("app/lib/util/stringUtil")
 --[[
 Takes a parameter list consisting of:
 1. Book Data  (Table)
-2. Body       (Table)
+2. Request    (Table)
 
 If the parameter list contains an ERROR, the parameter list is returned as is.
 
@@ -19,7 +19,7 @@ return {
 			local outOfRangeVerses = {}
 			local result = params
 
-			for _, elt in ipairs(params.body) do
+			for _, elt in ipairs(params.request) do
 				local foundChapter = false
 				for _, c in ipairs(params.bookData.chapters) do
 					if c.chapter == elt.chapter then

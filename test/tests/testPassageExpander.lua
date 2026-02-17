@@ -22,9 +22,9 @@ return {
         
         if result.warning then resultString = resultString .. ", warning = " .. result.warning end
         if result.error   then resultString = resultString .. ", error = "   .. result.error   end
-        if result.body    then 
-            resultString = resultString .. ", body = {"
-            for n, elt in ipairs(result.body) do
+        if result.request then 
+            resultString = resultString .. ", request = {"
+            for n, elt in ipairs(result.request) do
                 resultString = resultString .. " { chapter = " .. elt.chapter .. ", verse = " .. elt.verse .. " },"
             end
             resultString = resultString .. " }"
@@ -46,7 +46,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "3", chapterCount = 4 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3, body = { { chapter = 3, verse = 1-? }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3, request = { { chapter = 3, verse = 1-? }, } }")
     end,
 
     testExpansionSingleChapterForChapterlessBook = function(self)
@@ -54,7 +54,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "3", chapterCount = 0 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 3, body = { { chapter = 0, verse = 3 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 3, request = { { chapter = 0, verse = 3 }, } }")
     end,
 
     testExpansionSingleChapterInvalid = function(self)
@@ -70,7 +70,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Mark", passage = "1-3", chapterCount = 16 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Mark, chapterCount = 16, passage = 1-3, body = { { chapter = 1, verse = 1-? }, { chapter = 2, verse = 1-? }, { chapter = 3, verse = 1-? }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Mark, chapterCount = 16, passage = 1-3, request = { { chapter = 1, verse = 1-? }, { chapter = 2, verse = 1-? }, { chapter = 3, verse = 1-? }, } }")
     end,
 
     testExpansionChapterRangeForChapterlessBook = function(self)
@@ -78,7 +78,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = "1-3", chapterCount = 0 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 1-3, body = { { chapter = 0, verse = 1-3 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 1-3, request = { { chapter = 0, verse = 1-3 }, } }")
     end,
 
     testExpansionChapterRangeInvalid = function(self)
@@ -98,7 +98,7 @@ return {
         for i = 1, 21 do
             chaptersString = chaptersString .. "{ chapter = " .. i .. ", verse = 1-? }, "
         end
-        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = nil, body = { " .. chaptersString .. "} }")
+        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = nil, request = { " .. chaptersString .. "} }")
     end,
  
     testExpansionNoPassageChapterless = function(self)
@@ -106,7 +106,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = nil, chapterCount = 0 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = nil, body = { { chapter = 0, verse = 1-? }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = nil, request = { { chapter = 0, verse = 1-? }, } }")
     end,
 
     testExpansionChapterRangeWithWildcard = function(self)
@@ -114,7 +114,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Philippians", passage = "3-?", chapterCount = 4 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3-?, body = { { chapter = 3, verse = 1-? }, { chapter = 4, verse = 1-? }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Philippians, chapterCount = 4, passage = 3-?, request = { { chapter = 3, verse = 1-? }, { chapter = 4, verse = 1-? }, } }")
     end,
 
     testExpansionChapterRangeWithInvalidRange = function(self)
@@ -138,7 +138,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "John", passage = "3:16", chapterCount = 21 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = 3:16, body = { { chapter = 3, verse = 16 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = 3:16, request = { { chapter = 3, verse = 16 }, } }")
     end,
 
     testExpansionChapterAndVerseBad = function(self)
@@ -154,7 +154,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Ephesians", passage = "2:8-9", chapterCount = 6 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2:8-9, body = { { chapter = 2, verse = 8-9 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Ephesians, chapterCount = 6, passage = 2:8-9, request = { { chapter = 2, verse = 8-9 }, } }")
     end,
 
     testExpansionChapterAndMultipleVersesBad = function(self)
@@ -170,7 +170,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Lamentations", passage = "3:55-5:2", chapterCount = 5 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Lamentations, chapterCount = 5, passage = 3:55-5:2, body = { { chapter = 3, verse = 55-? }, { chapter = 4, verse = 1-? }, { chapter = 5, verse = 1-2 }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Lamentations, chapterCount = 5, passage = 3:55-5:2, request = { { chapter = 3, verse = 55-? }, { chapter = 4, verse = 1-? }, { chapter = 5, verse = 1-2 }, } }")
     end,
 
     testExpansionInvalidSingleChapter = function(self)
