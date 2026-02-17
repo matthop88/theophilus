@@ -116,7 +116,7 @@ RETURNS:
 - [X] Error progagation, with tests
 - [X] Results for verse lookup, with tests
 - [X] Results for missing verses, with tests
-- [ ] Integrate into main interface
+- [X] Integrate into main interface
 
 **Story Points**: 2 <br/>
 **Resolution**: UNRESOLVED <br/>
