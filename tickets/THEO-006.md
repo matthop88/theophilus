@@ -114,7 +114,7 @@ RETURNS:
 ### Acceptance Criteria:
 - [X] Body renamed to request
 - [X] Error progagation, with tests
-- [ ] Results for verse lookup, with tests
+- [X] Results for verse lookup, with tests
 - [ ] Results for missing verses, with tests
 - [ ] Integrate into main interface
 
