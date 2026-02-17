@@ -1,8 +1,7 @@
-return function(bookData, chapterNum)
-	for _, c in ipairs(bookData.chapters) do
-		if c.chapter == chapterNum then
-			return c
+return function(chapterData, verseNum)
+	for _, v in ipairs(chapterData.verses) do
+		if v.verse == verseNum then
+			return v
 		end
 	end
 end
-				
