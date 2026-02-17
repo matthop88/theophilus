@@ -115,7 +115,7 @@ RETURNS:
 - [X] Body renamed to request
 - [X] Error progagation, with tests
 - [X] Results for verse lookup, with tests
-- [ ] Results for missing verses, with tests
+- [X] Results for missing verses, with tests
 - [ ] Integrate into main interface
 
 **Story Points**: 2 <br/>
