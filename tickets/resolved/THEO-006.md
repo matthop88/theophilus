@@ -117,12 +117,12 @@ RETURNS:
 - [X] Results for verse lookup, with tests
 - [X] Results for missing verses, with tests
 - [X] Integrate into main interface
-- [ ] Bonus: Specify version in as quoted cmd line argument
+- [X] Bonus: Specify version in as quoted cmd line argument
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 4 <br/>
 
 **Dates**: <br/>
 **Created**: 02/10/26 1:38 pm <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 02/17/26 11:08 sm <br/>
