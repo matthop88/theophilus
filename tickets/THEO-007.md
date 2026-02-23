@@ -37,7 +37,7 @@ i.e., "Philippians" will be resolved to "Philippians 1-4"
 
 ### Acceptance Criteria:
 - [X] Print out is clean
-- [ ] General requests adjusted
+- [X] General requests adjusted
 - [ ] Separate app created
 
 **Story Points**: 2 <br/>
