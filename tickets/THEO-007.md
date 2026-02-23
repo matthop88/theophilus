@@ -36,7 +36,7 @@ General requests are adjusted to be as specific as possible.
 i.e., "Philippians" will be resolved to "Philippians 1-4"
 
 ### Acceptance Criteria:
-- [ ] Print out is clean
+- [X] Print out is clean
 - [ ] General requests adjusted
 - [ ] Separate app created
 
