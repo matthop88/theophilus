@@ -9,6 +9,7 @@ local VERSE_EXPANDER      = require("app/lib/parse/verseExpander")
 local VERSE_LOOKUP        = require("app/lib/lookup/verseLookup")
 
 local displayTable        = require("app/lib/display/displayTable")
+local displayCaption      = require("app/lib/display/displayCaption")
 
 local parseResult         = BOOK_NAME_EXTRACTOR:execute { args = __ARGS }
 local lookupResult        = BOOK_META_LOOKUP:execute(parseResult)
@@ -52,7 +53,12 @@ it should respond "Philippians 1-4", showing that it is trying to give us all 4 
 if result.error then
 	printError(result.error)
 else
+	local reference = result.book .. " " .. result.passage .. " (" .. result.version .. ")"
+	displayCaption(reference)
+
 	displayTable(result)
+
+	print("\n" .. reference .. "\n")
 end
 
 love.event.quit()
