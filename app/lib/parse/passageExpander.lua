@@ -99,8 +99,9 @@ return {
 		if params.error then
 			return params
 		else
-			local passage = params.passage or "1-?"
-			local result = params
+			local result   = params
+			local passage  = params.passage or "1-" .. params.chapterCount
+			result.passage = passage
 			local passageAttributes = parsePassage(passage)
 			if passageAttributes.error then
 				result.error = passageAttributes.error
@@ -115,8 +116,6 @@ return {
 					local startingChapterNum = tonumber(passageAttributes.startingChapter)
 					local endingChapterNum   = tonumber(passageAttributes.endingChapter)
 
-					if passageAttributes.endingChapter == "?" then endingChapterNum = params.chapterCount end
-					
 					local startingVerseNum = tonumber(passageAttributes.startingVerse)
 					local endingVerseNum   = tonumber(passageAttributes.endingVerse)
 
