@@ -38,12 +38,12 @@ i.e., "Philippians" will be resolved to "Philippians 1-4"
 ### Acceptance Criteria:
 - [X] Print out is clean
 - [X] General requests adjusted
-- [ ] Separate app created
+- [X] Separate app created
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 5 <br/>
 
 **Dates**: <br/>
 **Created**: 02/23/26 11:56 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 02/24/26 01:02 pm <br/>
