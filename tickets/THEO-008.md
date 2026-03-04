@@ -39,9 +39,14 @@ The frequency intervals are:
 A single failure causes a scripture to drop to the highest frequency (starting over).
 
 ### Acceptance Criteria:
-- [ ] Blah
-- [ ] Blah
-- [ ] Blah
+- [ ] Program reads 1st entry in file and displays that scripture
+- [ ] Program generates a data tracking file from file and displays most recent scripture not used.
+- [ ] Program updates tracking file dynamically.
+- [ ] Program generates a nextDate which is always 1 minute ahead.
+- [ ] SUCCESS and FAIL apps. SUCCESS does nothing, but FAIL sets nextDate to be immediate.
+- [ ] Track level
+- [ ] SUCCESS increments level. FAIL sets level back to first
+- [ ] Frequency is a function of level.
 
 **Story Points**: 3 <br/>
 **Resolution**: UNRESOLVED <br/>
