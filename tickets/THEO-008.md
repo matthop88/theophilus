@@ -14,6 +14,30 @@ Given a file listing Scriptures:
 Running the scheduling program will execute the BIBLE program, printing out the scripture for each entry in turn.
 The program will keep track of timestamps and continually select the scripture that was accessed least recently.
 
+Two other applications, SUCCESS and FAIL, send feedback.
+
+A success causes a scripture to move to a higher rung (lower frequency).
+Each scripture has a next date associated with it.
+
+The frequency intervals are:
+1. 1 hour
+2. 2 hours
+3. 4 hours
+4. 12 hours
+5. 1 day
+6. 2 days
+7. 4 days
+8. 1 week
+9. 2 weeks
+10. 1 month
+11. 2 months
+12. 3 months
+13. 4 months
+14. 6 months
+15. 1 year
+
+A single failure causes a scripture to drop to the highest frequency (starting over).
+
 ### Acceptance Criteria:
 - [ ] Blah
 - [ ] Blah
