@@ -39,7 +39,7 @@ The frequency intervals are:
 A single failure causes a scripture to drop to the highest frequency (starting over).
 
 ### Acceptance Criteria:
-- [ ] Program reads 1st entry in file and displays that scripture
+- [X] Program reads 1st entry in file and displays that scripture
 - [ ] Program generates a data tracking file from file and displays most recent scripture not used.
 - [ ] Program updates tracking file dynamically.
 - [ ] Program generates a nextDate which is always 1 minute ahead.
