@@ -1,5 +1,5 @@
-local STRING_UTIL    = require("app/lib/util/stringUtil")
-local TRACKING_DATA  = require("app/lib/scheduling/trackingData")
+local STRING_UTIL   = require("app/lib/util/stringUtil")
+local TRACKING_DATA = require("app/lib/scheduling/trackingData")
 
 local scheduleList = require("data/scheduling/scheduleList")
 
@@ -9,9 +9,6 @@ if not data then
 end
 
 local selected = TRACKING_DATA.select(data)
-
-selected.nextDate = os.time() + 60
-TRACKING_DATA.save(data)
 
 __ARGS = STRING_UTIL:split(selected.reference, " ")
 
