@@ -3,6 +3,12 @@ function love.load(args)
         require("test/framework/application")
     elseif args[1] and string.upper(args[1]) == "SCHEDULE" then
         require("app/schedule/scheduleApp")
+    elseif args[1] and string.upper(args[1]) == "CLOAK" then
+        __ARGS = {}
+        for n, arg in ipairs(args) do
+            if n > 1 then table.insert(__ARGS, arg) end
+        end
+        require("app/cloak/cloakApp")
     elseif args[1] and string.upper(args[1]) == "SUCCESS" then
         require("app/success/successApp")
     elseif args[1] and string.upper(args[1]) == "FAIL" then
