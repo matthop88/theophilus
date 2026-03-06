@@ -10,6 +10,9 @@ end
 
 local selected = TRACKING_DATA.select(data)
 
+selected.nextDate = os.time() + 60
+TRACKING_DATA.save(data)
+
 __ARGS = STRING_UTIL:split(selected.reference, " ")
 
 require("app/bible/bibleApp")
