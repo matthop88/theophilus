@@ -20,7 +20,7 @@ return {
         local dataObjs = LOOKUP_FILES("data/scriptures/newTestament")
         
         local resultString = "File Count: " .. #dataObjs .. ", book = { " .. dataObjs[1].book .. ", " .. dataObjs[2].book .. ", " .. dataObjs[3].book .. " }, version = { " .. dataObjs[1].version .. ", " .. dataObjs[2].version .. ", " .. dataObjs[3].version .. " }"
-        return ASSERT_EQUALS(name, #dataObjs, 3)
+        return ASSERT_EQUALS(name, #dataObjs, 4)
     end,
 
     testLookupNewTestamentPhilippiansFiles = function(self)
