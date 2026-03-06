@@ -98,7 +98,7 @@ return {
         for i = 1, 21 do
             chaptersString = chaptersString .. "{ chapter = " .. i .. ", verse = 1-? }, "
         end
-        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = nil, request = { " .. chaptersString .. "} }")
+        return ASSERT_EQUALS(name, resultString, "{ book = John, chapterCount = 21, passage = 1-21, request = { " .. chaptersString .. "} }")
     end,
  
     testExpansionNoPassageChapterless = function(self)
@@ -106,7 +106,7 @@ return {
 
         local result = PASSAGE_EXPANDER:execute { book = "Jude", passage = nil, chapterCount = 0 }
         local resultString = self:resultToString(result)
-        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = nil, request = { { chapter = 0, verse = 1-? }, } }")
+        return ASSERT_EQUALS(name, resultString, "{ book = Jude, chapterCount = 0, passage = 1-0, request = { { chapter = 0, verse = 1-0 }, } }")
     end,
 
     testExpansionChapterRangeWithWildcard = function(self)
