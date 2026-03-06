@@ -1,6 +1,12 @@
 function love.load(args)
     if args[1] == "test" then 
         require("test/framework/application")
+    elseif args[1] and string.upper(args[1]) == "SCHEDULE" then
+        require("app/schedule/scheduleApp")
+    elseif args[1] and string.upper(args[1]) == "SUCCESS" then
+        require("app/success/successApp")
+    elseif args[1] and string.upper(args[1]) == "FAIL" then
+        require("app/fail/failApp")
     elseif args[1] and string.upper(args[1]) == "BIBLE" then
         __ARGS = {}
         for n, arg in ipairs(args) do
