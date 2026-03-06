@@ -40,18 +40,18 @@ A single failure causes a scripture to drop to the highest frequency (starting o
 
 ### Acceptance Criteria:
 - [X] Program reads 1st entry in file and displays that scripture
-- [ ] Program generates a data tracking file from file and displays most recent scripture not used.
-- [ ] Program updates tracking file dynamically.
-- [ ] Program generates a nextDate which is always 1 minute ahead.
-- [ ] SUCCESS and FAIL apps. SUCCESS does nothing, but FAIL sets nextDate to be immediate.
-- [ ] Track level
-- [ ] SUCCESS increments level. FAIL sets level back to first
-- [ ] Frequency is a function of level.
+- [X] Program generates a data tracking file from file and displays most recent scripture not used.
+- [X] Program updates tracking file dynamically.
+- [X] Program generates a nextDate which is always 1 minute ahead.
+- [X] SUCCESS and FAIL apps. SUCCESS does nothing, but FAIL sets nextDate to be immediate.
+- [X] Track level
+- [X] SUCCESS increments level. FAIL sets level back to first
+- [X] Frequency is a function of level.
 
 **Story Points**: 3 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 5 <br/>
 
 **Dates**: <br/>
 **Created**: 03/04/26 10:42 am <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 03/06/26 02:02 pm <br/>
