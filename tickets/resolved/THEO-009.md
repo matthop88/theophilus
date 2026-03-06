@@ -43,17 +43,17 @@ In addition, punctuation is never filtered out; word length is calculated treati
 For example: "now," qualifies as 3 characters, and the filtered result is "___," (see verse 5 above.)
 
 ### Acceptance Criteria:
-- [ ] Bible app refactored so that there is a function that can be called programmatically to return a passage of scripture, and a callable application which utilizes said function and prints it to the screen.
-- [ ] Working algorithm for filtering words in a string based upon word length; maximum word length for filtering is parameterizable.
-- [ ] Unit tests written for the filtering algorithm above.
-- [ ] Transformation function which takes scripture passage and filters the verses accordingly using the above algorithm.
-- [ ] Unit tests written for the transformation function above.
-- [ ] CLOAK application written which, given a scripture passage and a level, prints out the filtered passage on the screen based upon the level provided
+- [X] Bible app refactored so that there is a function that can be called programmatically to return a passage of scripture, and a callable application which utilizes said function and prints it to the screen.
+- [X] Working algorithm for filtering words in a string based upon word length; maximum word length for filtering is parameterizable.
+- [X] Unit tests written for the filtering algorithm above.
+- [X] Transformation function which takes scripture passage and filters the verses accordingly using the above algorithm.
+- [X] Unit tests written for the transformation function above.
+- [X] CLOAK application written which, given a scripture passage and a level, prints out the filtered passage on the screen based upon the level provided
 
 **Story Points**: 3 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 5 <br/>
 
 **Dates**: <br/>
 **Created**: 03/06/26 02:21 pm <br/>
-**Completed**: --/--/-- --:-- _m <br/>
+**Completed**: 03/06/26 03:02 pm <br/>
