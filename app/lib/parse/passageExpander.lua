@@ -116,6 +116,7 @@ return {
 					local startingChapterNum = tonumber(passageAttributes.startingChapter)
 					local endingChapterNum   = tonumber(passageAttributes.endingChapter)
 
+					if passageAttributes.endingChapter == "?" then endingChapterNum = params.chapterCount end
 					local startingVerseNum = tonumber(passageAttributes.startingVerse)
 					local endingVerseNum   = tonumber(passageAttributes.endingVerse)
 
