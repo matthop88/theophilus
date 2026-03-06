@@ -47,17 +47,17 @@ If the plus parameter is specified, the level field is NOT bumped up to the next
 If the FAIL application is called, the filter field is decreased by 1 only if the nextDate of the scripture is already 0.
 
 ### Acceptance Criteria:
-- [ ] SCHEDULE app calls CLOAK app (with a parameter of "level=0")
-- [ ] Frequency table updated
-- [ ] Filter fields are automatically added to the trackingData file with a value of 0 if they do not exist.
-- [ ] Value of filter field is utilized when calling CLOAK
-- [ ] "plus" command-line parameter added to SUCCESS
-- [ ] FAIL application updated to decrease filter field by 1 if nextDate of scripture is already 0
+- [x] SCHEDULE app calls CLOAK app (with a parameter of "level=0")
+- [x] Frequency table updated
+- [x] Filter fields are automatically added to the trackingData file with a value of 0 if they do not exist.
+- [x] Value of filter field is utilized when calling CLOAK
+- [x] "plus" command-line parameter added to SUCCESS
+- [x] FAIL application updated to decrease filter field by 1 if nextDate of scripture is already 0
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
+**Resolution**: RESOLVED <br/>
 **Sprint**: FY26 Q1 Sprint 5 <br/>
 
 **Dates**: <br/>
 **Created**: 03/06/26 03:20 pm <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 03/06/26 03:44 pm <br/>
