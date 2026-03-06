@@ -11,5 +11,6 @@ end
 local selected = TRACKING_DATA.select(data)
 
 __ARGS = STRING_UTIL:split(selected.reference, " ")
+table.insert(__ARGS, "level=" .. selected.filter)
 
-require("app/bible/bibleApp")
+require("app/cloak/cloakApp")

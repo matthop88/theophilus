@@ -10,7 +10,11 @@ local loadTrackingData = function()
     file:close()
     local objFn, err = load(chunk)
     if objFn then
-        return objFn()
+        local data = objFn()
+        for _, entry in ipairs(data) do
+            if entry.filter == nil then entry.filter = 0 end
+        end
+        return data
     else
         print("ERROR loading tracking data: " .. err)
         return nil
@@ -22,9 +26,10 @@ local saveTrackingData = function(data)
     file:write("return {\n")
     for _, entry in ipairs(data) do
         file:write(string.format(
-            "    { reference = %-25s level = %2d, nextDate = %d },\n",
+            "    { reference = %-25s level = %2d, filter = %2d, nextDate = %d },\n",
             "\"" .. entry.reference .. "\",",
             entry.level,
+            entry.filter,
             entry.nextDate
         ))
     end
@@ -35,7 +40,7 @@ end
 local generateTrackingData = function(scheduleList)
     local data = {}
     for _, reference in ipairs(scheduleList) do
-        table.insert(data, { reference = reference, level = 1, nextDate = 0 })
+        table.insert(data, { reference = reference, level = 1, filter = 0, nextDate = 0 })
     end
     saveTrackingData(data)
     return data
