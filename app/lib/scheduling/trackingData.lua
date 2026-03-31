@@ -56,9 +56,28 @@ local selectNextScripture = function(data)
     return selected
 end
 
+local syncTrackingData = function(data, scheduleList)
+    local existing = {}
+    for _, entry in ipairs(data) do
+        existing[entry.reference] = true
+    end
+
+    local added = false
+    for _, reference in ipairs(scheduleList) do
+        if not existing[reference] then
+            table.insert(data, { reference = reference, level = 1, filter = 0, nextDate = 0 })
+            added = true
+        end
+    end
+
+    if added then saveTrackingData(data) end
+    return data
+end
+
 return {
     load     = loadTrackingData,
     save     = saveTrackingData,
     generate = generateTrackingData,
+    sync     = syncTrackingData,
     select   = selectNextScripture,
 }

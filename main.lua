@@ -3,6 +3,8 @@ function love.load(args)
         require("test/framework/application")
     elseif args[1] and string.upper(args[1]) == "SCHEDULE" then
         require("app/schedule/scheduleApp")
+    elseif args[1] and string.upper(args[1]) == "SCHEDULEGUI" then
+        require("app/scheduleGui/scheduleGuiApp")
     elseif args[1] and string.upper(args[1]) == "CLOAK" then
         __ARGS = {}
         for n, arg in ipairs(args) do
@@ -21,6 +23,12 @@ function love.load(args)
             if n > 1 then table.insert(__ARGS, arg) end
         end
         require("app/fail/failApp")
+    elseif args[1] and string.upper(args[1]) == "VERIFY" then
+        __ARGS = {}
+        for n, arg in ipairs(args) do
+            if n > 1 then table.insert(__ARGS, arg) end
+        end
+        require("app/verify/verifyApp")
     elseif args[1] and string.upper(args[1]) == "BIBLE" then
         __ARGS = {}
         for n, arg in ipairs(args) do

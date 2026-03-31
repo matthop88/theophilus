@@ -19,7 +19,20 @@ local cloakString = function(str, maxLength)
     end))
 end
 
+local collectCloakedWords = function(str, maxLength)
+    local words = {}
+    if maxLength == 0 then return words end
+    str:gsub("%S+", function(word)
+        local clean = stripPunctuation(word)
+        if #clean > 0 and #clean <= maxLength then
+            table.insert(words, clean)
+        end
+    end)
+    return words
+end
+
 return {
-    cloakWord   = cloakWord,
-    cloakString = cloakString,
+    cloakWord          = cloakWord,
+    cloakString        = cloakString,
+    collectCloakedWords = collectCloakedWords,
 }
